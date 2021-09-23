@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.lt.bean.Course;
 import com.lt.bean.Grade;
@@ -18,12 +20,14 @@ import com.lt.bean.Student;
 import com.lt.dao.AdminDaoImpl;
 import com.lt.dao.ProfessorDaoImpl;
 import com.lt.exceptions.GradeNotAddedException;
-
+import com.lt.exceptions.ProfessorNotAddedException;
+@Service
 public class ProfessorInterfaceImpl implements ProfessorInterface{
 	private static Logger logger = Logger.getLogger(ProfessorInterfaceImpl.class);
 	
+	@Autowired
+	private ProfessorDaoImpl professorDaoImpl;
 	private static volatile ProfessorInterfaceImpl instance=null;
-	ProfessorDaoImpl professorDaoImpl= ProfessorDaoImpl.getInstance();
 	private ProfessorInterfaceImpl()
 	{
 
@@ -89,9 +93,15 @@ public class ProfessorInterfaceImpl implements ProfessorInterface{
 	}
 	
 	 
-	public String getProfessorById(String profId)
+	public String getProfessorById(String profId) throws ProfessorNotAddedException
 	{
-		return professorDaoImpl.getProfessorById(profId);
+		try {
+			return professorDaoImpl.getProfessorById(profId);
+			
+		} catch (ProfessorNotAddedException e) {
+			logger.error(e);
+			throw new ProfessorNotAddedException(profId);
+		}
 	}
 
 

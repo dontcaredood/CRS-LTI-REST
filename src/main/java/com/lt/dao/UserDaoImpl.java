@@ -10,12 +10,13 @@ import org.apache.log4j.Logger;
 import com.lt.constants.Constants;
 import com.lt.exceptions.UserNotFoundException;
 import com.lt.utils.DBUtils;
-;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserDaoImpl implements UserDao{
 	private static Logger logger = Logger.getLogger(UserDaoImpl.class);
 	private static volatile UserDaoImpl instance=null;
-	private UserDaoImpl()
+	 UserDaoImpl()
 	{
 
 	}

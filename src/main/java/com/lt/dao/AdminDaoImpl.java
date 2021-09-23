@@ -9,7 +9,9 @@ import com.lt.bean.*;
 import com.lt.constants.*;
 import com.lt.exceptions.*;
 import com.lt.utils.DBUtils;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class AdminDaoImpl implements AdminDao{
 
 	private static AdminDaoImpl adminDaoImpl =null;
@@ -18,7 +20,7 @@ public class AdminDaoImpl implements AdminDao{
 	private PreparedStatement statement = null;
 	
 	//private Constructor for AdminDaoImpl
-	private AdminDaoImpl(){
+	 AdminDaoImpl(){
 		logger.info("AdminDaoImpl Instance Created");
 	}
 	

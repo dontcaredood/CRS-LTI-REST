@@ -13,7 +13,9 @@ import com.lt.business.RegisteredCoursesInterfaceImpl;
 import com.lt.constants.Constants;
 import com.lt.constants.ModeOfPayment;
 import com.lt.utils.DBUtils;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class RegisteredCoursesDaoImpl implements RegisteredCoursesDao{
 
 	private static Logger logger = Logger.getLogger(RegisteredCoursesDaoImpl.class);
@@ -21,7 +23,7 @@ public class RegisteredCoursesDaoImpl implements RegisteredCoursesDao{
 	
 	private static volatile RegisteredCoursesDaoImpl instance = null;
 
-	private RegisteredCoursesDaoImpl() {
+	 RegisteredCoursesDaoImpl() {
 	}
 
 	public static RegisteredCoursesDaoImpl getInstance() {

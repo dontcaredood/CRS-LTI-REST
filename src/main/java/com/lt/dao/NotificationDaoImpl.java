@@ -11,14 +11,9 @@ import org.apache.log4j.Logger;
 
 import com.lt.constants.*;
 import com.lt.utils.DBUtils;
+import org.springframework.stereotype.Repository;
 
-/**
- * 
- * @author JEDI-03
- * Class to implement Notification Dao Operations
- * Used for adding the notification to the database
- *
- */
+@Repository
 public class NotificationDaoImpl implements NotificationDao{
 	private static volatile NotificationDaoImpl instance=null;
 	private static Logger logger = Logger.getLogger(NotificationDaoImpl.class);
@@ -26,7 +21,7 @@ public class NotificationDaoImpl implements NotificationDao{
 	/**
 	 * Default Constructor
 	 */
-	private NotificationDaoImpl()
+	 NotificationDaoImpl()
 	{
 
 	}
