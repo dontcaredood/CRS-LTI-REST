@@ -1,7 +1,9 @@
 package com.lt.business;
 import com.lt.dao.*;
 import com.lt.exceptions.UserNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserInterfaceImpl implements UserInterface{
 	
 	private static volatile UserInterfaceImpl instance=null;

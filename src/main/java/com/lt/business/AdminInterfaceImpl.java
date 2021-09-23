@@ -16,7 +16,9 @@ import com.lt.exceptions.CourseNotFoundException;
 import com.lt.exceptions.ProfessorNotAddedException;
 import com.lt.exceptions.StudentNotFoundForApprovalException;
 import com.lt.exceptions.UserIdAlreadyInUseException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdminInterfaceImpl implements AdminInterface{
 	
 	private static AdminInterfaceImpl adminInterfaceImpl = null;

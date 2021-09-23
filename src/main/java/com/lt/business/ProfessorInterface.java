@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.*;
 import com.lt.bean.*;
 import com.lt.exceptions.GradeNotAddedException;
+import com.lt.exceptions.ProfessorNotAddedException;
 
 public interface ProfessorInterface {
 
@@ -36,7 +37,8 @@ public interface ProfessorInterface {
 	 * Method to get the professor name with ID
 	 * @param profId
 	 * @return Professor name 
+	 * @throws ProfessorNotAddedException 
 	 */
-	public String getProfessorById(String profId);
+	public String getProfessorById(String profId) throws ProfessorNotAddedException;
 
 }

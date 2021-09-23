@@ -8,11 +8,10 @@ import org.apache.log4j.Logger;
 import com.lt.constants.*;
 import com.lt.dao.NotificationDaoImpl;
 
-/**
- * 
- * @author JEDI-03
- * This method implements all the method related to the notification system
- */
+
+import org.springframework.stereotype.Service;
+
+@Service
 public class NotificationInterfaceImpl implements NotificationInterface {
 
 	

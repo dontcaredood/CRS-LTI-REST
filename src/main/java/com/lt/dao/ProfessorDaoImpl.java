@@ -15,15 +15,17 @@ import com.lt.bean.Grade;
 import com.lt.bean.RegisteredCourses;
 import com.lt.bean.Student;
 import com.lt.constants.Constants;
+import com.lt.exceptions.ProfessorNotAddedException;
 import com.lt.utils.DBUtils;
-
+import org.springframework.stereotype.Repository;
+@Repository
 public class ProfessorDaoImpl implements ProfessorDao {
 
 
 	private static Logger logger = Logger.getLogger(ProfessorDaoImpl.class);
 	private static volatile ProfessorDaoImpl instance=null;
 	
-	private ProfessorDaoImpl(){}
+	 ProfessorDaoImpl(){}
 	
 	public static ProfessorDaoImpl getInstance()
 	{
@@ -116,7 +118,7 @@ public class ProfessorDaoImpl implements ProfessorDao {
 	
 
 
-	public String getProfessorById(String profId)
+	public String getProfessorById(String profId) throws ProfessorNotAddedException
 	{
 		String prof_Name = null;
 		Connection connection=DBUtils.getConnection();
@@ -129,11 +131,14 @@ public class ProfessorDaoImpl implements ProfessorDao {
 			rs.next();
 			
 			prof_Name = rs.getString(1);
-			
+			if(prof_Name.equalsIgnoreCase("") || prof_Name.isEmpty()) {
+				throw new ProfessorNotAddedException(profId);
+			}
 		}
 		catch(SQLException e)
 		{
 			logger.error(e.getMessage());
+			throw new ProfessorNotAddedException(profId);
 		}
 		/*
 		 * finally { try { connection.close(); } catch (SQLException e) {

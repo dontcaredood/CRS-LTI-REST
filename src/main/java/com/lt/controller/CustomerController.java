@@ -1,33 +1,39 @@
 package com.lt.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lt.bean.Course;
 import com.lt.bean.Customer;
+import com.lt.bean.Professor;
+import com.lt.bean.Student;
 import com.lt.business.AdminInterfaceImpl;
+import com.lt.exceptions.CourseNotFoundException;
 
 @RestController
-@RequestMapping("/Customer")
+@RequestMapping("/sandy")
 public class CustomerController {
-	
-	
-	@RequestMapping(produces = MediaType.APPLICATION_JSON, 
-		    method = RequestMethod.GET,
-		    value = "/details")
-		@ResponseBody
-	 public List<Course> details(){
+	AdminInterfaceImpl adminInterfaceImpl = AdminInterfaceImpl.getInstance();
+
+	@RequestMapping(value="/test", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ResponseBody
+	public ResponseEntity<Student> test() {
+
+		Student s = new Student();
 		
-		AdminInterfaceImpl adminInterfaceImpl = AdminInterfaceImpl.getInstance();
-			
-		
-		return adminInterfaceImpl.showCourses();	
-	
+		return new ResponseEntity<>(s,HttpStatus.OK);
 	}
 }

@@ -14,7 +14,9 @@ import com.lt.bean.Student;
 import com.lt.constants.Gender;
 import com.lt.dao.StudentDaoImpl;
 import com.lt.exceptions.*;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentInterfaceImpl implements StudentInterface{
 	
 	private static Logger logger = Logger.getLogger(StudentInterfaceImpl.class);

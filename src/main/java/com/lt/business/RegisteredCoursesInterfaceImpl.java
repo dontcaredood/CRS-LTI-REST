@@ -8,7 +8,9 @@ import com.lt.bean.Grade;
 import com.lt.dao.RegisteredCoursesDaoImpl;
 import com.lt.exceptions.*;
 import com.lt.exceptions.CourseNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RegisteredCoursesInterfaceImpl implements RegisteredCoursesInterface{
 
 

@@ -20,12 +20,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class StudentDaoImpl implements StudentDao {
 	private static Logger logger = Logger.getLogger(StudentDaoImpl.class);
 	
 	private static volatile StudentDaoImpl instance=null;
-	private StudentDaoImpl()
+	 StudentDaoImpl()
 	{
 
 	}

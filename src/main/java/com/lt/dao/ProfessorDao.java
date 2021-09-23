@@ -7,6 +7,7 @@ import com.lt.bean.Course;
 import com.lt.bean.Grade;
 import com.lt.bean.RegisteredCourses;
 import com.lt.bean.Student;
+import com.lt.exceptions.ProfessorNotAddedException;
 
 public interface ProfessorDao {
 
@@ -40,8 +41,9 @@ public interface ProfessorDao {
 	 * Method to Get professor name by id
 	 * @param profId
 	 * @return Professor Id in string
+	 * @throws ProfessorNotAddedException 
 	 */
-	public String getProfessorById(String profId);
+	public String getProfessorById(String profId) throws ProfessorNotAddedException;
 
 	
 } 
