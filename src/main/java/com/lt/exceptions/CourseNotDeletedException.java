@@ -3,11 +3,7 @@
  */
 package com.lt.exceptions;
 
-/**
- * Exception course is deleted from catalog
- * @author JEDI-03
- *
- */
+
 public class CourseNotDeletedException extends Exception{
 private String courseCode;
 	

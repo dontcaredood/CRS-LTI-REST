@@ -3,10 +3,6 @@
  */
 package com.lt.exceptions;
 
-/**
- * @author Rag_Patel
- *
- */
 public class UserIdAlreadyInUseException extends Exception{
 	private String userId;
 	

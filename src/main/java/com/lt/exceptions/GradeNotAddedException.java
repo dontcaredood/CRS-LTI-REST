@@ -1,10 +1,6 @@
 package com.lt.exceptions;
 
-/**
- * Exception to check if student has been alloted grade by professor
- * @author JEDI-03
- *
- */
+
 public class GradeNotAddedException extends Exception{
 
 	private int studentId;

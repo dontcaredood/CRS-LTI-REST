@@ -1,10 +1,6 @@
 package com.lt.exceptions;
 
-/**
- * Exception to check if seats are available for course registration
- * @author JEDI-03
- *
- */
+
 public class SeatNotAvailableException extends Exception{
 	
 	private String courseCode;

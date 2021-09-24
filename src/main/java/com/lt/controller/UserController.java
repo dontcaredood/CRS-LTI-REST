@@ -102,7 +102,7 @@ public class UserController {
 	
 	@RequestMapping(value="/studentRegister", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
 	@ResponseStatus(HttpStatus.OK)
-	@ExceptionHandler({StudentNotRegisteredException.class})
+	//@ExceptionHandler({StudentNotRegisteredException.class})
 	public ResponseEntity<String> studentRegister(@RequestBody Student student) {
 		int studentId;
 		try

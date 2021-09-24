@@ -3,11 +3,10 @@
  */
 package com.lt.exceptions;
 
-/**
- * Exception to check if the maximum number of registered courses is exceeded
- * @author JEDI-03
- *
- */
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class CourseLimitExceedException extends Exception{
 	
 	private int num;

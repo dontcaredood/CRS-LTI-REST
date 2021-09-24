@@ -1,10 +1,6 @@
 package com.lt.exceptions;
 
-/**
- * Exception to check if student is not registered 
- * @author JEDI-03
- *
- */
+
 public class StudentNotRegisteredException extends Exception{
 	 private String studentName;
 	 

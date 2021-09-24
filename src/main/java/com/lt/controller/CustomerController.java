@@ -27,12 +27,12 @@ import com.lt.exceptions.CourseNotFoundException;
 public class CustomerController {
 	AdminInterfaceImpl adminInterfaceImpl = AdminInterfaceImpl.getInstance();
 
-	@RequestMapping(value="/test", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
+	@RequestMapping(value="/test", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ResponseBody
-	public ResponseEntity<Student> test() {
+	public ResponseEntity<Course> test() {
 
-		Student s = new Student();
+		Course s = new Course();
 		
 		return new ResponseEntity<>(s,HttpStatus.OK);
 	}

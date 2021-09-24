@@ -3,11 +3,7 @@
  */
 package com.lt.exceptions;
 
-/**
- * Exception thrown when student is not found for approval
- * @author JEDI-03
- *
- */
+
 public class StudentNotFoundForApprovalException extends Exception {
 	private int studentId;
 	
