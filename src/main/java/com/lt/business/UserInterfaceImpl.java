@@ -1,28 +1,17 @@
 package com.lt.business;
 import com.lt.dao.*;
 import com.lt.exceptions.UserNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
+@Scope("singleton")
 public class UserInterfaceImpl implements UserInterface{
+	@Autowired
+	private UserDaoImpl userDaoImpl;
 	
-	private static volatile UserInterfaceImpl instance=null;
-	UserDaoImpl userDaoImpl =  UserDaoImpl.getInstance();
-	private UserInterfaceImpl()
-	{
-
-	}
-	
-	public static UserInterfaceImpl getInstance()
-	{
-		if(instance==null)
-		{
-			synchronized(UserInterfaceImpl.class){
-				instance=new UserInterfaceImpl();
-			}
-		}
-		return instance;
-	}
 	public boolean updatePassword(String userID,String newPassword) {
 		return userDaoImpl.updatePassword(userID, newPassword);
 	}
@@ -33,21 +22,14 @@ public class UserInterfaceImpl implements UserInterface{
 		try
 		{
 			return userDaoImpl.verifyCredentials(userID, password);		
-		}
-		finally
-		{
-			
+		}catch (Exception e) {
+			throw new UserNotFoundException(userID);
 		}
 	}
 	
 	
-	public String getRole(String userId) {
+	public String getRole(String userId) throws UserNotFoundException {
 		return userDaoImpl.getRole(userId);
 	}
-
-
-	
-
-
 
 }

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.lt.bean.*;
+import com.lt.exceptions.CourseNotFoundException;
 
 public interface RegisteredCoursesInterface {
 
@@ -39,8 +40,9 @@ public interface RegisteredCoursesInterface {
 	 * @param studentId
 	 * @return list of Registered Courses
 	 * @throws SQLException 
+	 * @throws CourseNotFoundException 
 	 */
-	public List<Course> viewRegisteredCourses(int studentId) throws SQLException;
+	public List<Course> viewRegisteredCourses(int studentId) throws SQLException, CourseNotFoundException;
 	
 	/**
 	 * Method to view grade card of the student

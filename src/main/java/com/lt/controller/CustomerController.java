@@ -30,9 +30,9 @@ public class CustomerController {
 	@RequestMapping(value="/test", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ResponseBody
-	public ResponseEntity<Course> test() {
+	public ResponseEntity<Customer> test() {
 
-		Course s = new Course();
+		Customer s = new Customer();
 		
 		return new ResponseEntity<>(s,HttpStatus.OK);
 	}

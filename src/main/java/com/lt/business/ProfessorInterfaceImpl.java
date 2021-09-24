@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.lt.bean.Course;
@@ -22,32 +23,13 @@ import com.lt.dao.ProfessorDaoImpl;
 import com.lt.exceptions.GradeNotAddedException;
 import com.lt.exceptions.ProfessorNotAddedException;
 @Service
+@Scope("singleton")
 public class ProfessorInterfaceImpl implements ProfessorInterface{
 	private static Logger logger = Logger.getLogger(ProfessorInterfaceImpl.class);
 	
 	@Autowired
 	private ProfessorDaoImpl professorDaoImpl;
-	private static volatile ProfessorInterfaceImpl instance=null;
-	private ProfessorInterfaceImpl()
-	{
-
-	}
 	
-	/**
-	 * Method to make ProfessorOperation Singleton
-	 * @return
-	 */
-	public static ProfessorInterfaceImpl getInstance()
-	{
-		if(instance==null)
-		{
-			// This is a synchronized block, when multiple threads will access this instance
-			synchronized(ProfessorInterfaceImpl.class){
-				instance=new ProfessorInterfaceImpl();
-			}
-		}
-		return instance;
-	}
 	public boolean addGrade(int studentId,String courseCode,String grade) throws GradeNotAddedException {
 		try
 		{

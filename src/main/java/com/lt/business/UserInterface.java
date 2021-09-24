@@ -25,8 +25,9 @@ public interface UserInterface {
 	 * Method to get role of a specific User
 	 * @param userId
 	 * @return Role of the User
+	 * @throws UserNotFoundException 
 	 */
-    public String getRole(String userId);
+    public String getRole(String userId) throws UserNotFoundException;
    
  
 

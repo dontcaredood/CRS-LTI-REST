@@ -12,28 +12,18 @@ import com.lt.bean.Grade;
 import com.lt.business.RegisteredCoursesInterfaceImpl;
 import com.lt.constants.Constants;
 import com.lt.constants.ModeOfPayment;
+import com.lt.exceptions.CourseNotFoundException;
 import com.lt.utils.DBUtils;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Scope("singleton")
 public class RegisteredCoursesDaoImpl implements RegisteredCoursesDao{
 
 	private static Logger logger = Logger.getLogger(RegisteredCoursesDaoImpl.class);
 	private PreparedStatement stmt = null;
-	
-	private static volatile RegisteredCoursesDaoImpl instance = null;
-
-	 RegisteredCoursesDaoImpl() {
-	}
-
-	public static RegisteredCoursesDaoImpl getInstance() {
-		if (instance == null) {
-			synchronized (RegisteredCoursesDaoImpl.class) {
-				instance = new RegisteredCoursesDaoImpl();
-			}
-		}
-		return instance;
-	}
 	
 	@Override
 	public boolean addCourse(String courseCode, int studentId) throws SQLException{
@@ -319,7 +309,7 @@ public class RegisteredCoursesDaoImpl implements RegisteredCoursesDao{
 
 	
 	@Override
-	public List<Course> viewRegisteredCourses(int studentId) throws SQLException {
+	public List<Course> viewRegisteredCourses(int studentId) throws SQLException, CourseNotFoundException {
 
 		Connection conn = DBUtils.getConnection();
 		List<Course> registeredCourseList = new ArrayList<Course>();
@@ -329,7 +319,7 @@ public class RegisteredCoursesDaoImpl implements RegisteredCoursesDao{
 			stmt.setInt(1, studentId);
 
 			ResultSet rs = stmt.executeQuery();
-			
+			if(!rs.next())throw new CourseNotFoundException(String.valueOf(studentId));
 			while (rs.next()) {
 				registeredCourseList.add(new Course(rs.getString("courseCode"), rs.getString("courseName"),rs.getString("courseDesc"),
 						rs.getString("professorId")));
