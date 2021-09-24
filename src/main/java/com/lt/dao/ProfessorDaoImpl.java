@@ -17,26 +17,16 @@ import com.lt.bean.Student;
 import com.lt.constants.Constants;
 import com.lt.exceptions.ProfessorNotAddedException;
 import com.lt.utils.DBUtils;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 @Repository
+@Scope("singleton")
 public class ProfessorDaoImpl implements ProfessorDao {
 
 
 	private static Logger logger = Logger.getLogger(ProfessorDaoImpl.class);
-	private static volatile ProfessorDaoImpl instance=null;
 	
-	 ProfessorDaoImpl(){}
-	
-	public static ProfessorDaoImpl getInstance()
-	{
-		if(instance==null)
-		{
-			synchronized(ProfessorDaoImpl.class){
-				instance=new ProfessorDaoImpl();
-			}
-		}
-		return instance;
-	}
 	public List<Course> getCoursesByProfessor(String profId) {
 		Connection connection=DBUtils.getConnection();
 		List<Course> courseList=new ArrayList<Course>();

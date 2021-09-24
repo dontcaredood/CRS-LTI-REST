@@ -8,31 +8,17 @@ import org.apache.log4j.Logger;
 import com.lt.constants.*;
 import com.lt.dao.NotificationDaoImpl;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
+@Scope("singleton")
 public class NotificationInterfaceImpl implements NotificationInterface {
 
-	
-	private static volatile NotificationInterfaceImpl instance=null;
-	NotificationDaoImpl notificationDaoInterface = NotificationDaoImpl.getInstance();
+	@Autowired
+	private NotificationDaoImpl notificationDaoInterface;
 	private static Logger logger = Logger.getLogger(NotificationInterfaceImpl.class);
-	private NotificationInterfaceImpl()
-	{
-
-	}
-	
-	public static NotificationInterfaceImpl getInstance()
-	{
-		if(instance==null)
-		{
-			synchronized(NotificationInterfaceImpl.class){
-				instance=new NotificationInterfaceImpl();
-			}
-		}
-		return instance;
-	}
 	
 	
 	public int sendNotification(NotificationType type, int studentId,ModeOfPayment modeOfPayment,String paymentMethod,double amount) {

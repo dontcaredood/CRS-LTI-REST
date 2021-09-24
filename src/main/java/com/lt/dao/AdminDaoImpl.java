@@ -9,35 +9,19 @@ import com.lt.bean.*;
 import com.lt.constants.*;
 import com.lt.exceptions.*;
 import com.lt.utils.DBUtils;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Scope("singleton")
 public class AdminDaoImpl implements AdminDao{
 
-	private static AdminDaoImpl adminDaoImpl =null;
-	
 	private static Logger logger = Logger.getLogger(AdminDaoImpl.class);
 	private PreparedStatement statement = null;
-	
-	//private Constructor for AdminDaoImpl
-	 AdminDaoImpl(){
-		logger.info("AdminDaoImpl Instance Created");
-	}
-	
-	//Singleton Implementation Method
-	public static AdminDaoImpl getInstance(){
-		if(adminDaoImpl==null){
-			synchronized (AdminDaoImpl.class){
-				adminDaoImpl = new AdminDaoImpl();
-			}
-		}
-		return adminDaoImpl;
-	}
-	
 
 	Connection connection = DBUtils.getConnection();
 	
-
 	public boolean deleteCourse(String courseCode) throws CourseNotFoundException, CourseNotDeletedException{
 		
 		statement = null;

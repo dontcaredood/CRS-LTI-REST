@@ -34,8 +34,13 @@ public class UserController {
 	@Autowired
 	private StudentInterfaceImpl studentInterfaceImpl;
 	private static Logger logger = Logger.getLogger(UserController.class);
-
 	
+	/**
+	 * Method to login the user
+	 * @param username
+	 * @param password
+	 * @return String
+	 */
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	@ExceptionHandler({ValidationException.class})
 	@ResponseStatus(HttpStatus.OK)
@@ -78,31 +83,69 @@ public class UserController {
 		}		
 	}
 	
+	/**
+	 * Method to verify the user
+	 * @param username
+	 * @return String
+	 */
 	@RequestMapping(value="/verify", method = RequestMethod.GET)
 	@ExceptionHandler({UserNotFoundException.class})
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<String> verifyCredentials(@RequestParam String userName, @RequestParam String password) throws UserNotFoundException {
+	public ResponseEntity<String> verifyCredentials(@RequestParam String username, @RequestParam String password) throws UserNotFoundException {
 		
 		try{
-			logger.info("Verify User: "+userName);
-			boolean flag = userInterfaceImpl.verifyCredentials(userName, password);
+			logger.info("Verify User: "+username);
+			boolean flag = userInterfaceImpl.verifyCredentials(username, password);
 			return new ResponseEntity<>(flag?"TRUE":"FALSE", HttpStatus.OK);
 		}catch(UserNotFoundException e) {
-			logger.error("No User Found: "+userName);
+			logger.error("No User Found: "+username);
 			return new ResponseEntity<String>("No User Found", HttpStatus.NOT_FOUND);
 
 		}
 	}
 	
+	/**
+	 * Method to get role of the user
+	 * @param username
+	 * @return String
+	 */
 	@RequestMapping(value="/getRole", method = RequestMethod.GET)
 	@ExceptionHandler({UserNotFoundException.class})
 	public ResponseEntity<String> getRole(@RequestParam String username) {
-		return new ResponseEntity<>(userInterfaceImpl.getRole(username),HttpStatus.OK);
+		try{
+			logger.info("Get Roler: "+username);
+
+			return new ResponseEntity<>(userInterfaceImpl.getRole(username),HttpStatus.OK);
+		}catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+		}
+	}
+	/**
+	 * Method to update the password of the user
+	 * @param username
+	 * @password
+	 * @return Boolean
+	 */
+	@RequestMapping(value="/updatePassword", method = RequestMethod.PUT)
+	@ExceptionHandler({UserNotFoundException.class})
+	public ResponseEntity<String> updatePassword(@RequestParam String username, @RequestParam String password) {
+		try{
+			logger.info("Update password : "+username);
+			boolean result = userInterfaceImpl.updatePassword(username, password);
+			return new ResponseEntity<>(result?"Password Updated":"Password Not updated",HttpStatus.OK);
+		}catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+		}
 	}
 	
+	/**
+	 * Method to get student to register
+	 * @param Student
+	 * @return String
+	 */
 	@RequestMapping(value="/studentRegister", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
 	@ResponseStatus(HttpStatus.OK)
-	//@ExceptionHandler({StudentNotRegisteredException.class})
+	@ExceptionHandler({StudentNotRegisteredException.class})
 	public ResponseEntity<String> studentRegister(@RequestBody Student student) {
 		int studentId;
 		try

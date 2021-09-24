@@ -10,28 +10,14 @@ import org.apache.log4j.Logger;
 import com.lt.constants.Constants;
 import com.lt.exceptions.UserNotFoundException;
 import com.lt.utils.DBUtils;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Scope("singleton")
 public class UserDaoImpl implements UserDao{
 	private static Logger logger = Logger.getLogger(UserDaoImpl.class);
-	private static volatile UserDaoImpl instance=null;
-	 UserDaoImpl()
-	{
-
-	}
-	
-	public static UserDaoImpl getInstance()
-	{
-		if(instance==null)
-		{
-			synchronized(UserDaoImpl.class){
-				instance=new UserDaoImpl();
-			}
-		}
-		return instance;
-	}
-
 	
 	public boolean updatePassword(String userId, String newPassword) {
 		Connection connection= DBUtils.getConnection();
@@ -99,7 +85,7 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	
-	public String getRole(String userId) {
+	public String getRole(String userId) throws UserNotFoundException {
 		Connection connection=DBUtils.getConnection();
 		try {
 			PreparedStatement statement = connection.prepareStatement(Constants.GET_ROLE);
@@ -109,6 +95,8 @@ public class UserDaoImpl implements UserDao{
 			if(rs.next())
 			{
 				return rs.getString("role");
+			}else {
+				throw new UserNotFoundException(userId);
 			}
 				
 		}
@@ -116,10 +104,9 @@ public class UserDaoImpl implements UserDao{
 		{
 			logger.error(e.getMessage());
 		}
-		/*
-		 * finally { try { connection.close(); } catch (SQLException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); } }
-		 */
+		
+		 finally { try { connection.close(); } catch (SQLException e) { e.printStackTrace(); } }
+		
 		return null;
 	}
 

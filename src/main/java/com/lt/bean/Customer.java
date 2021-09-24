@@ -5,8 +5,15 @@ public class Customer {
 	private int customerId;
 	private String customerName;
 	private String customerAddress;
+	private Course course;
 	
 	
+	public Course getCourse() {
+		return course;
+	}
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 	public int getCustomerId() {
 		return customerId;
 	}

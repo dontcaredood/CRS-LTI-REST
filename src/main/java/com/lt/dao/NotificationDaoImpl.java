@@ -11,36 +11,15 @@ import org.apache.log4j.Logger;
 
 import com.lt.constants.*;
 import com.lt.utils.DBUtils;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Scope("singleton")
 public class NotificationDaoImpl implements NotificationDao{
-	private static volatile NotificationDaoImpl instance=null;
+
 	private static Logger logger = Logger.getLogger(NotificationDaoImpl.class);
-
-	/**
-	 * Default Constructor
-	 */
-	 NotificationDaoImpl()
-	{
-
-	}
-	
-	/**
-	 * Method to make NotificationDaoOperation Singleton
-	 * @return
-	 */
-	public static NotificationDaoImpl getInstance()
-	{
-		if(instance==null)
-		{
-			// This is a synchronized block, when multiple threads will access this instance
-			synchronized(NotificationDaoImpl.class){
-				instance=new NotificationDaoImpl();
-			}
-		}
-		return instance;
-	}
 	
 	public int sendNotification(NotificationType type, int studentId,ModeOfPayment modeOfPayment,String paymentMethod,double amount) throws SQLException{
 		int notificationId=0;

@@ -25,8 +25,9 @@ public interface UserDao {
 	 * Method to get Role of User from DataBase
 	 * @param userId
 	 * @return Role
+	 * @throws UserNotFoundException 
 	 */
-	public String getRole(String userId);
+	public String getRole(String userId) throws UserNotFoundException;
 	
 	
 	/**

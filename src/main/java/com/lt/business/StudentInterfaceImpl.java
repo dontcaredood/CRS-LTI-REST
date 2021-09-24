@@ -14,29 +14,18 @@ import com.lt.bean.Student;
 import com.lt.constants.Gender;
 import com.lt.dao.StudentDaoImpl;
 import com.lt.exceptions.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
+@Scope("singleton")
 public class StudentInterfaceImpl implements StudentInterface{
 	
 	private static Logger logger = Logger.getLogger(StudentInterfaceImpl.class);
-	StudentDaoImpl studentDaoImpl=  StudentDaoImpl.getInstance();
-	private static volatile StudentInterfaceImpl instance=null;
-	private StudentInterfaceImpl()
-	{
-
-	}
-	
-	public static StudentInterfaceImpl getInstance()
-	{
-		if(instance==null)
-		{
-			synchronized(StudentInterfaceImpl.class){
-				instance=new StudentInterfaceImpl();
-			}
-		}
-		return instance;
-	}
+	@Autowired
+	StudentDaoImpl studentDaoImpl;
 
 	public int register(Student student) throws StudentNotRegisteredException{
 		int studentId;

@@ -16,14 +16,16 @@ import com.lt.exceptions.CourseNotFoundException;
 import com.lt.exceptions.ProfessorNotAddedException;
 import com.lt.exceptions.StudentNotFoundForApprovalException;
 import com.lt.exceptions.UserIdAlreadyInUseException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AdminInterfaceImpl implements AdminInterface{
 	
 	private static AdminInterfaceImpl adminInterfaceImpl = null;
-	
-	AdminDaoImpl adminDaoImpl = AdminDaoImpl.getInstance();
+	@Autowired
+	AdminDaoImpl adminDaoImpl;
 	private static Logger logger = Logger.getLogger(AdminDaoImpl.class);
 	
 	//private Constructor for AdminInterfaceImpl

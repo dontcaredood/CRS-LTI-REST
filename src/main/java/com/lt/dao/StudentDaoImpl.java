@@ -20,28 +20,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Scope("singleton")
 public class StudentDaoImpl implements StudentDao {
 	private static Logger logger = Logger.getLogger(StudentDaoImpl.class);
-	
-	private static volatile StudentDaoImpl instance=null;
-	 StudentDaoImpl()
-	{
-
-	}
-	
-	public static StudentDaoImpl getInstance()
-	{
-		if(instance==null)
-		{
-			synchronized(StudentDaoImpl.class){
-				instance=new StudentDaoImpl();
-			}
-		}
-		return instance;
-	}
 
 	public int addStudent(Student student) throws StudentNotRegisteredException{
 		Connection connection=DBUtils.getConnection();

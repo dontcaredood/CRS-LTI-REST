@@ -30,13 +30,21 @@ public class ProfessorController {
 
 	@Autowired
 	private ProfessorInterfaceImpl professorImpl;
-
+	/*
+	 * Method to View Enrolled Student
+	 *
+	 * @PathVariable professorId
+	 *
+	 * @return ResponseEntity
+	 *
+	 * @throws ValidationException,SQLException
+	 */
 	@RequestMapping(value = "/viewenrolledstudents/{professorId}", method = RequestMethod.GET)
-	@ExceptionHandler({GradeNotAddedException.class})
+	@ExceptionHandler({ GradeNotAddedException.class })
 	@ResponseBody
 	public List<RegisteredCourses> viewEnrolledStudents(@PathVariable(value = "professorId") String professorId) {
 		try {
-			logger.info("Professor ID: "+professorId);
+			logger.info("Professor ID: " + professorId);
 			List<RegisteredCourses> list = professorImpl.viewEnrolledStudents(professorId);
 			return list;
 		} catch (Exception e) {
@@ -44,33 +52,67 @@ public class ProfessorController {
 			return null;
 		}
 	}
-	
+	/*
+	 * Method to get Courses
+	 *
+	 * @PathVariable professorId
+	 *
+	 * @return ResponseEntity
+	 *
+	 * @throws ValidationException,SQLException
+	 */
 	@RequestMapping(value = "/getcourses/{professorId}", method = RequestMethod.GET)
-	@ExceptionHandler({GradeNotAddedException.class})
+	@ExceptionHandler({ GradeNotAddedException.class })
 	@ResponseBody
 	public ResponseEntity<List<Course>> getCourses(@PathVariable(value = "professorId") String professorId) {
 		List<Course> list = professorImpl.getCourses(professorId);
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
+	/*
+	 * Method to View Professor by ID
+	 *
+	 * @PathVariable professorId
+	 *
+	 * @return ResponseEntity
+	 *
+	 * @throws ValidationException,SQLException
+	 */
 	@RequestMapping(value = "/getprofessorbyid/{professorId}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<String> getProfessorById(@PathVariable(value = "professorId") String professorId) {
 		try {
-			return  new ResponseEntity<>(professorImpl.getProfessorById(professorId),HttpStatus.OK);
-		}catch(Exception e) {
-			return  new ResponseEntity<String>(e.getMessage(),HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(professorImpl.getProfessorById(professorId), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
 	
-	@RequestMapping(value = "/addgrade",method = RequestMethod.POST)
-	@ExceptionHandler({GradeNotAddedException.class})
-	public boolean addGrade(@RequestParam int studentId,@RequestParam String courseCode,@RequestParam String grade) throws GradeNotAddedException
-	{
-	return professorImpl.addGrade(studentId, courseCode, grade);
+	/*
+	 * Method to Add Grade
+	 *
+	 * @RequestParam studentId
+	 * 
+	 * @RequestParam courseCode
+	 *
+	 * @RequestParam grade
+	 *
+	 * @return ResponseEntity
+	 *
+	 * @throws ValidationException,SQLException
+	 */
+
+	@RequestMapping(value = "/addgrade", method = RequestMethod.POST)
+	@ExceptionHandler({ GradeNotAddedException.class })
+	public ResponseEntity<String> addGrade(@RequestParam int studentId, @RequestParam String courseCode,
+			@RequestParam String grade) throws GradeNotAddedException {
+		try {
+			boolean result = professorImpl.addGrade(studentId, courseCode, grade);
+			return new ResponseEntity<>(result?"Grade Added for"+studentId+".":"Grade Not added", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+
+		}
 	}
-	
-	
-	
 
 }

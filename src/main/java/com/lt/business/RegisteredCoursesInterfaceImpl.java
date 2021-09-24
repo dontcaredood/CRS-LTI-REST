@@ -8,28 +8,18 @@ import com.lt.bean.Grade;
 import com.lt.dao.RegisteredCoursesDaoImpl;
 import com.lt.exceptions.*;
 import com.lt.exceptions.CourseNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
+@Scope("singleton")
 public class RegisteredCoursesInterfaceImpl implements RegisteredCoursesInterface{
 
 
-	private static volatile RegisteredCoursesInterfaceImpl instance = null;
-
-	private RegisteredCoursesInterfaceImpl() {
-	}
-
-	public static RegisteredCoursesInterfaceImpl getInstance() {
-		if (instance == null) {
-			synchronized (RegisteredCoursesInterfaceImpl.class) {
-				instance = new RegisteredCoursesInterfaceImpl();
-			}
-		}
-		return instance;
-	}
-
-
-	RegisteredCoursesDaoImpl registeredCoursesDaoImpl =  RegisteredCoursesDaoImpl.getInstance();
+	@Autowired
+	private RegisteredCoursesDaoImpl registeredCoursesDaoImpl;
 
 	public boolean addCourse(String courseCode, int studentId,List<Course> availableCourseList) throws CourseNotFoundException, CourseLimitExceedException, SeatNotAvailableException, SQLException 
 	{
@@ -57,7 +47,7 @@ public class RegisteredCoursesInterfaceImpl implements RegisteredCoursesInterfac
 	}
 
 
-	public List<Course> viewRegisteredCourses(int studentId) throws SQLException {
+	public List<Course> viewRegisteredCourses(int studentId) throws SQLException, CourseNotFoundException {
 		return registeredCoursesDaoImpl.viewRegisteredCourses(studentId);
 	}
     
