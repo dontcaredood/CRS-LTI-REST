@@ -1,2 +1,12 @@
 2021-09-24 15:38:20,440 com.lt.dao.AdminDaoImpl:33 [INFO] : AdminInterfaceImpl Instance Created
 2021-09-24 15:38:21,528 com.lt.dao.AdminDaoImpl:33 [INFO] : AdminInterfaceImpl Instance Created
+2021-09-24 15:55:50,790 com.lt.dao.UserDaoImpl:72 [INFO] : Something went wrong, please try again! No operations allowed after connection closed.
+2021-09-24 15:55:59,390 com.lt.dao.UserDaoImpl:72 [INFO] : Something went wrong, please try again! No operations allowed after connection closed.
+2021-09-24 15:56:05,110 com.lt.dao.UserDaoImpl:72 [INFO] : Something went wrong, please try again! No operations allowed after connection closed.
+2021-09-24 15:56:06,040 com.lt.dao.UserDaoImpl:72 [INFO] : Something went wrong, please try again! No operations allowed after connection closed.
+2021-09-24 15:56:06,924 com.lt.dao.UserDaoImpl:72 [INFO] : Something went wrong, please try again! No operations allowed after connection closed.
+2021-09-24 16:01:54,503 com.lt.dao.AdminDaoImpl:33 [INFO] : AdminInterfaceImpl Instance Created
+2021-09-24 16:01:55,832 com.lt.dao.AdminDaoImpl:33 [INFO] : AdminInterfaceImpl Instance Created
+2021-09-24 16:03:11,388 com.lt.dao.AdminDaoImpl:33 [INFO] : AdminInterfaceImpl Instance Created
+2021-09-24 16:03:12,692 com.lt.dao.AdminDaoImpl:33 [INFO] : AdminInterfaceImpl Instance Created
+2021-09-24 16:04:16,717 com.lt.dao.AdminDaoImpl:322 [INFO] : 5 professors in the institute.

@@ -1,7 +1,7 @@
 package com.lt.constants;
 
 public class Constants {
-	
+//User Queries
 public static final String DELETE_COURSE_QUERY = "delete from crs_course where courseCode = ?";
 public static final String ADD_COURSE_QUERY = "insert into crs_course(courseCode, courseName, courseDesc, professorId) values (?, ?, ?,?)";
 public static final String VIEW_PENDING_ADMISSION_QUERY = "select userId, name, password, role, gender, address, studentId from crs_student natural join crs_user where isApproved = 'N'";
@@ -11,7 +11,7 @@ public static final String ADD_PROFESSOR_QUERY = "insert into crs_professor(user
 public static final String ASSIGN_COURSE_QUERY = "update crs_Course set professorId = ? where courseCode = ?";
 public static final String VIEW_COURSE_QUERY = "select courseCode, courseName, professorId from crs_course ";
 public static final String VIEW_PROFESSOR_QUERY = "select b.userId, b.name, b.gender, a.department, a.designation, b.address from crs_professor a inner join crs_user b on a.userId = b.userId";
-
+//Professor Queries
 public static final String ADD_STUDENT="insert into crs_student (userId,branchName,isApproved) values (?,?,?)";
 public static final String VERIFY_CREDENTIALS="select password from crs_user where userId = ?";
 public static final String GET_ROLE="select role from crs_user where userId = ? ";
