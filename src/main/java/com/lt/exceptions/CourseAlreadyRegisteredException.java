@@ -1,10 +1,9 @@
 package com.lt.exceptions;
 
-/**
- * Exception to check if course is already registered by student
- * @author JEDI-03
- *
- */
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class CourseAlreadyRegisteredException extends Exception{
 	
 	private String courseCode;

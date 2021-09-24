@@ -3,11 +3,7 @@
  */
 package com.lt.exceptions;
 
-/**
- * Exception to check if course is already present in catalog
- * @author JEDI-03
- *
- */
+
 public class CourseFoundException extends Exception{
 	private String courseCode;
 	

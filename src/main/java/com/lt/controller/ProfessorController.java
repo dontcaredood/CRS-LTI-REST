@@ -63,7 +63,7 @@ public class ProfessorController {
 		}
 	}
 	
-	@RequestMapping(value = "/addgrade",method = RequestMethod.GET)
+	@RequestMapping(value = "/addgrade",method = RequestMethod.POST)
 	@ExceptionHandler({GradeNotAddedException.class})
 	public boolean addGrade(@RequestParam int studentId,@RequestParam String courseCode,@RequestParam String grade) throws GradeNotAddedException
 	{

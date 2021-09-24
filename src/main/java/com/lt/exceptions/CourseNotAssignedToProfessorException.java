@@ -3,11 +3,10 @@
  */
 package com.lt.exceptions;
 
-/**
- * Exception course is  not assigned to professor
- * @author JEDI-03
- *
- */
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class CourseNotAssignedToProfessorException extends Exception{
 	private String courseCode;
 	private String professorId;
